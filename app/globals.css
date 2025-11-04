@@ -1,8 +1,27 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light & Dark theme background + text */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
-main {
-  padding: 40px;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, sans-serif;
+}
+
+/* Extra smooth UI */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
