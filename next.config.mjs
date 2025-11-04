@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Don't fail the Vercel build because of TS/ESLint while we bootstrap
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  reactStrictMode: true
+  // output: 'standalone', // you can enable later if you want
 };
-
 export default nextConfig;
