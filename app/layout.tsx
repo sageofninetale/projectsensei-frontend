@@ -1,4 +1,9 @@
-export const metadata = { title: "ProjectSensei UI", description: "Dark dashboard" };
+import "@/app/globals.css"; // ✅ required for Tailwind to work
+
+export const metadata = {
+  title: "ProjectSensei UI",
+  description: "Dark dashboard",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
