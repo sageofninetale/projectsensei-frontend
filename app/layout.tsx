@@ -1,15 +1,16 @@
-export const metadata = { title: 'ProjectSensei — Frontend Preview' };
+import './globals.css';
+import type { Metadata } from 'next';
+import { ReactNode } from 'react';
 
-export default function RootLayout({
-  children,
-}: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: 'ProjectSensei',
+  description: 'Frontend',
+};
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <main style={{ padding: 24 }}>
-          {children}
-        </main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
