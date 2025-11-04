@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { appDir: true },
+  output: 'export',             // important for "next export"
+  images: { unoptimized: true } // safe for static export
 };
-
 export default nextConfig;
