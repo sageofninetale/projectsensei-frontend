@@ -1,16 +1,24 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { ReactNode } from 'react';
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ProjectSensei',
-  description: 'Frontend',
-};
+  title: 'ProjectSensei Dashboard',
+  description: 'Smart Analytics Dashboard for ProjectSensei'
+}
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
-  );
+  )
 }
