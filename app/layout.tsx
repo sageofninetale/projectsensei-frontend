@@ -1,4 +1,4 @@
-export const metadata = { title: 'ProjectSensei' };
+export const metadata = { title: "ProjectSensei — Frontend" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
