@@ -64,3 +64,32 @@ export default function LoginPage() {
     </div>
   );
 }
+
+import { supabase } from '/lib/supabaseClient';
+
+export default function HomePage() {
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    window.location.href = '/login';
+  }
+
+  return (
+    <main style={{ padding: '40px' }}>
+      <h1>Welcome to ProjectSensei UI</h1>
+
+      <button
+        onClick={handleSignOut}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          background: '#0070f3',
+          color: '#fff',
+          borderRadius: '6px',
+          fontSize: '16px'
+        }}
+      >
+        Sign Out
+      </button>
+    </main>
+  );
+}
