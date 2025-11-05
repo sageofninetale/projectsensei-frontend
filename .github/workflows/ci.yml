@@ -16,11 +16,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            package.json
 
+      # If a lockfile is present, npm ci will be used; otherwise it falls back.
       - name: Install deps
-        run: npm ci
+        run: npm ci || npm install --no-audit --no-fund
 
       - name: Lint
         run: npm run lint
