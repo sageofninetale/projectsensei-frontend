@@ -1,16 +1,10 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { ReactNode } from 'react';
+// app/layout.tsx
+export const metadata = { title: 'ProjectSensei', description: 'Build Check' };
 
-export const metadata: Metadata = {
-  title: 'ProjectSensei',
-  description: 'Frontend',
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ margin: 0 }}>{children}</body>
     </html>
   );
 }
