@@ -1,5 +1,4 @@
-// app/layout.tsx
-export const metadata = { title: 'ProjectSensei', description: 'Build Check' };
+export const metadata = { title: 'ProjectSensei', description: 'Build Fearlessly — Sensei Has You' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
