@@ -1,14 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // temporary while stabilising:
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 
-  // ensure we ship a normal Node server build (not static export)
-  // and avoid quirky optimisations while we finish auth
+  // 👇 Prevent Next from trying static export
   output: 'standalone',
-  experimental: { typedRoutes: false },
+
+  // 👇 Disable static optimization attempts
+  experimental: {
+    typedRoutes: false,
+    esmExternals: 'loose',
+    serverActions: false,
+  },
 };
 
 export default nextConfig;
