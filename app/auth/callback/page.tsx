@@ -1,32 +1,35 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
-import { useRouter } from 'next/navigation';
 
-export default function CallbackPage() {
+export default function AuthCallbackPage() {
   const router = useRouter();
-  const [status, setStatus] = useState('Verifying link…');
+  const search = useSearchParams();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function verify() {
-      const { data, error } = await supabase.auth.getSession();
-
-      if (error || !data?.session) {
-        setStatus('Link expired or invalid ❌ Try logging in again.');
-        return;
-      }
-
-      setStatus('✅ Signed in! Redirecting…');
-      setTimeout(() => router.push('/'), 800);
+    const code = search.get('code');
+    if (!code) {
+      setError('No auth code found in the URL.');
+      return;
     }
 
-    verify();
-  }, [router]);
+    (async () => {
+      const { error } = await supabase.auth.exchangeCodeForSession({ code });
+      if (error) {
+        setError(error.message);
+      } else {
+        router.replace('/'); // go to home
+      }
+    })();
+  }, [search, router]);
 
   return (
-    <div className="min-h-dvh grid place-items-center">
-      <p className="text-lg">{status}</p>
-    </div>
+    <main style={{ padding: 32 }}>
+      <h1>Signing you in…</h1>
+      {error && <p style={{ color: 'crimson' }}>⚠️ {error}</p>}
+    </main>
   );
 }
