@@ -1,3 +1,8 @@
+// Make the whole app render at request-time (safest while we finish Phase 5)
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 export const metadata = {
   title: 'ProjectSensei',
   description: 'Build Fearlessly — Sensei Has You',
@@ -6,8 +11,6 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/* if you want global CSS, uncomment the next line and ensure the file exists */}
-      {/* <link rel="stylesheet" href="/globals.css" /> */}
       <body style={{ margin: 0 }}>{children}</body>
     </html>
   );
