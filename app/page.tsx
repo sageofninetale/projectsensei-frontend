@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main style={{padding: 40}}><h1>ProjectSensei – Build Check</h1></main>;
+  return <main style={{padding:40}}><h1>Build Check</h1></main>;
 }
