@@ -1,7 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  eslint: { ignoreDuringBuilds: true }
-};
+// middleware.js (temporary test)
+import { NextResponse } from 'next/server';
 
-export default nextConfig;
+export function middleware() {
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
