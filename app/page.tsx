@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+// CHANGE THIS:
+// import { supabase } from '@/lib/supabaseClient';
+// TO THIS:
+import { supabase } from '../lib/supabaseClient';
 
 export default function HomePage() {
   const [email, setEmail] = useState<string | null>(null);
