@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-// import { supabase } from '@/lib/supabaseClient';
 import { supabase } from '../../../lib/supabaseClient';
 
 export default function CallbackPage() {
@@ -11,17 +10,13 @@ export default function CallbackPage() {
 
   useEffect(() => {
     async function run() {
+      // Supabase parses tokens from URL automatically; fetch session to confirm.
       const { data: { session } } = await supabase.auth.getSession();
       const redirectTo = params.get('redirectTo') || '/';
-      if (session) router.replace(redirectTo);
-      else router.replace('/login?error=no_session');
+      router.replace(session ? redirectTo : '/login?error=no_session');
     }
     run();
   }, [router, params]);
 
-  return (
-    <main style={{ minHeight: '100svh', display: 'grid', placeItems: 'center' }}>
-      <p>Finishing sign-in…</p>
-    </main>
-  );
+  return <main style={{ minHeight: '100svh', display: 'grid', placeItems: 'center' }}>Finishing sign-in…</main>;
 }
