@@ -1,4 +1,3 @@
-// middleware.js
 import { NextResponse } from 'next/server'
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
@@ -7,9 +6,12 @@ const PUBLIC = ['/login', '/auth/callback', '/favicon.ico', '/_next', '/images',
 export async function middleware(req) {
   const { pathname } = new URL(req.url)
 
-  // allow public paths & static assets
-  if (PUBLIC.some((p) => pathname === p || pathname.startsWith(p + '/')) ||
-      pathname.startsWith('/_next') || pathname.startsWith('/images') || pathname.startsWith('/public')) {
+  if (
+    PUBLIC.some((p) => pathname === p || pathname.startsWith(p + '/')) ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/images') ||
+    pathname.startsWith('/public')
+  ) {
     return NextResponse.next()
   }
 
@@ -22,6 +24,7 @@ export async function middleware(req) {
     loginUrl.searchParams.set('redirectTo', pathname || '/')
     return NextResponse.redirect(loginUrl)
   }
+
   return res
 }
 
