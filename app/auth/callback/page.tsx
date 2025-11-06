@@ -2,7 +2,8 @@
 
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { supabase } from '@/lib/supabaseClient';
+// import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../../lib/supabaseClient';
 
 export default function CallbackPage() {
   const router = useRouter();
@@ -10,8 +11,6 @@ export default function CallbackPage() {
 
   useEffect(() => {
     async function run() {
-      // Supabase handles tokens in URL automatically because detectSessionInUrl=true.
-      // We still fetch the session to be sure and then redirect.
       const { data: { session } } = await supabase.auth.getSession();
       const redirectTo = params.get('redirectTo') || '/';
       if (session) router.replace(redirectTo);
