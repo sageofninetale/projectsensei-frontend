@@ -9,10 +9,11 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSent(false);
 
     const redirectTo =
       typeof window !== 'undefined'
@@ -34,62 +35,37 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-dvh grid place-items-center p-6">
-      <div className="w-full max-w-sm space-y-4">
-        <h1 className="text-2xl font-semibold">Sign in</h1>
+    <main style={{ padding: '32px', maxWidth: 420 }}>
+      <h1>Sign in with magic link</h1>
 
-        {sent ? (
-          <p>✅ Check your inbox. Click the link to finish signing in.</p>
-        ) : (
-          <form onSubmit={onSubmit} className="space-y-3">
-            <input
-              type="email"
-              required
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded border px-3 py-2"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full rounded bg-black text-white px-3 py-2 disabled:opacity-50"
-            >
-              {loading ? 'Sending…' : 'Send magic link'}
-            </button>
-            {error && <p className="text-sm text-red-600">{error}</p>}
-          </form>
-        )}
-      </div>
-    </div>
-  );
-}
+      <form onSubmit={onSubmit} style={{ marginTop: 16 }}>
+        <input
+          type="email"
+          required
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: '100%', padding: 10, marginBottom: 12 }}
+        />
+        <button
+          type="submit"
+          disabled={loading || !email}
+          style={{ padding: '10px 16px' }}
+        >
+          {loading ? 'Sending…' : 'Send magic link'}
+        </button>
+      </form>
 
-import { supabase } from '/lib/supabaseClient';
-
-export default function HomePage() {
-  async function handleSignOut() {
-    await supabase.auth.signOut();
-    window.location.href = '/login';
-  }
-
-  return (
-    <main style={{ padding: '40px' }}>
-      <h1>Welcome to ProjectSensei UI</h1>
-
-      <button
-        onClick={handleSignOut}
-        style={{
-          marginTop: '20px',
-          padding: '10px 20px',
-          background: '#0070f3',
-          color: '#fff',
-          borderRadius: '6px',
-          fontSize: '16px'
-        }}
-      >
-        Sign Out
-      </button>
+      {sent && (
+        <p style={{ marginTop: 12 }}>
+          ✅ Check your email for the sign-in link.
+        </p>
+      )}
+      {error && (
+        <p style={{ marginTop: 12, color: 'crimson' }}>
+          ⚠️ {error}
+        </p>
+      )}
     </main>
   );
 }
