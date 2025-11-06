@@ -1,9 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-// CHANGE THIS:
-// import { supabase } from '@/lib/supabaseClient';
-// TO THIS:
 import { supabase } from '../lib/supabaseClient';
 
 export default function HomePage() {
@@ -24,24 +21,14 @@ export default function HomePage() {
         <div style={{ fontWeight: 800, color: '#E50914' }}>{'</>'} ProjectSensei</div>
         <button
           onClick={handleSignOut}
-          style={{
-            padding: '8px 12px',
-            borderRadius: 12,
-            border: '1px solid #333',
-            background: 'transparent',
-            color: 'white',
-            cursor: 'pointer'
-          }}
+          style={{ padding: '8px 12px', borderRadius: 12, border: '1px solid #333', background: 'transparent', color: 'white', cursor: 'pointer' }}
         >
           Sign out
         </button>
       </div>
-
       <section style={{ padding: 28 }}>
         <h1 style={{ fontSize: 28, marginBottom: 8 }}>Welcome{email ? `, ${email}` : ''}</h1>
-        <p style={{ color: '#bdbdbd' }}>
-          Next.js App Router is live on Vercel. Route protection is enabled. Magic link is set on /login.
-        </p>
+        <p style={{ color: '#bdbdbd' }}>Protected home. Magic link is on /login.</p>
       </section>
     </main>
   );
